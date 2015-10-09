@@ -16,7 +16,7 @@
                                                 {% for workout in latest_workouts_list %}
                                                     <tr>
                                                 <td>
-                                                <a href="{% url 'workouts:workout-detail' workout.id %}">{{ workout.name }}</a></td>
+                                                <a href="{% url 'workouts:workout-detail' workout.id %}">{{ workout.name }}</a> - Updated {{ workout.modified_date }}</td>
                                                 <td class="td-actions text-right">
                                                     <a href="{% url 'workouts:workout-update' workout.id %}"  type="button" rel="tooltip" title="Edit Workout" class="btn btn-info btn-simple btn-xs">
                                                         <i class="fa fa-edit"></i>
@@ -40,7 +40,7 @@
                                 <div class="footer">
                                     <hr>
                                     <div class="stats">
-                                        <i class="fa fa-history"></i> Updated 3 minutes ago
+                                        <i class="fa fa-history"></i> Updated {{ workout.modified_date }}
                                     </div>                                    
                                 </div>
                             </div>
