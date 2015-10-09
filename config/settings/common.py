@@ -44,6 +44,7 @@ THIRD_PARTY_APPS = (
 # Apps specific for this project go here.
 LOCAL_APPS = (
     'squatbot.users',  # custom users app
+    'squatbot.workouts'
     # Your stuff: custom apps go here
 )
 
@@ -99,7 +100,7 @@ MANAGERS = ADMINS
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
     # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
-    'default': env.db("DATABASE_URL", default="postgres:///squatbot"),
+    'default': env.db("DATABASE_URL", default="postgres://dba:live@localhost:/squatbot"),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
@@ -110,7 +111,7 @@ DATABASES['default']['ATOMIC_REQUESTS'] = True
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'CT'
+TIME_ZONE = 'America/Chicago'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
 LANGUAGE_CODE = 'en-us'

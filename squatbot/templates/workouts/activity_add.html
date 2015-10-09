@@ -1,0 +1,58 @@
+  {% extends "base.html" %}
+{% block content %}             
+
+
+<div class="col-md-8">
+  <div class="card">
+      <div class="header">
+          <h4 class="title">{{workout.name }}- Add Activity</h4>
+      </div>
+      <div class="content">
+        <form method="post">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+            {{ form }}
+            {{ formset.management_form }}
+            </div>
+          </div>
+        </div>
+        {% if form %}
+
+            <!-- Display Form -->
+            {% for set_form in formset %}
+              <div class="row">
+                    <div class="form-group" id="set-{{ forloop.counter0 }}">
+                    <h6>Set {{forloop.counter}}</h6>  
+                    {{ set_form.non_field_errors }}
+                    {{ set_form.errors }}                  
+                    {% for field in set_form.visible_fields %}
+                            <div class="col-md-4">
+                              <div class="form-group">
+
+                                 {{ field.label_tag }} {{ field }}
+                              </div>
+                            </div>    
+
+                      {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+            
+        {% endif %}
+                    <button type="submit" class="btn btn-info btn-fill pull-left" value="Create">Add Activity</button>
+                     <a href="{% url 'workouts:workout-detail' workout.id %}" class="btn" role="button">Cancel</a>
+                                                        <div class="clearfix"></div>
+
+      </form>               
+      </div>
+  </div>
+</div>
+
+
+{% endblock content %}
+
+
+
+

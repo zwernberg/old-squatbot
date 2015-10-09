@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{%block content %}
+
+<div class="col-md-12">
+                        <div class="card ">
+                            <div class="header">
+                                <h4 class="title">Workouts</h4>
+                                <p class="category"></p>
+                            </div>
+                            <div class="content">                      
+                                <div class="table-full-width">
+                                    <table class="table">
+                                        <tbody>
+                                            {% if latest_workouts_list %}
+                                                {% for workout in latest_workouts_list %}
+                                                    <tr>
+                                                <td>
+                                                <a href="{% url 'workouts:workout-detail' workout.id %}">{{ workout.name }}</a></td>
+                                                <td class="td-actions text-right">
+                                                    <a href="{% url 'workouts:workout-update' workout.id %}"  type="button" rel="tooltip" title="Edit Workout" class="btn btn-info btn-simple btn-xs">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                     <a href="{% url 'workouts:workout-delete' workout.id %}"  type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                                       {% endfor %}
+                                            {% else %}
+                                                <p>No workouts are available.</p>
+                                            {% endif %}
+
+                                            
+                                          
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <div class="footer">
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-history"></i> Updated 3 minutes ago
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+{%endblock content %}
+

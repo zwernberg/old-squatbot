@@ -1,0 +1,64 @@
+
+{% extends "base.html" %}
+{% block content %}
+<div class="col-md-12">
+    <div class="card">
+        <div class="header">
+            <h4 class="title">Update Workout</h4>
+		        </div>
+		        <div class="content">
+		        	<div class="row">
+					    <div class="col-md-4">
+						    <div class="form-group">
+						        <form action="" method="post">{% csrf_token %}
+									{{ form }}
+					
+								<button type="submit" class="btn btn-info btn-fill pull-center" value="Update">Update Workout</button>
+								<a href="{% url 'workouts:workout-detail' workout.id %}" class="btn" role="button">Cancel</a>
+								 <div class="clearfix"></div>
+								</form>
+							</div>
+						</div>
+					</div>
+					
+                   	<div class="row ">
+                    	<div class="col-md-6">
+							<div class="table-full-width">
+	                            <table class="table">
+	                                <tbody>
+	                                    {% if workout.activities.all %}
+	                                        {% for activity in workout.activities.all %}
+	                                        <tr>
+	                                        <td>
+	                                        <!--
+											TODO: change to activity-update view
+											-->
+	                                        <a href="{% url 'workouts:activity-update' workout.id activity.id %}">{{ activity.name }}</a></td>
+	                                        <td class="td-actions text-right">
+	                                            <a href="{% url 'workouts:activity-update' workout.id activity.id %}"  type="button" rel="tooltip" title="Edit Activity" class="btn btn-info btn-simple btn-xs">
+	                                                <i class="fa fa-edit"></i>
+	                                            </a>
+	                                            <a href="{% url 'workouts:activity-delete' workout.id activity.id %}"  type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+	                                                <i class="fa fa-times"></i>
+	                                            </button>
+	                                        </td>
+	                                    </tr>
+	                                    {% for set in activity.sets.all  %}
+	                                    <tr>
+					    				<td>{{ set.reps }} reps @ {{ set.weight }} lbs
+					    				</tr>
+					    				{% endfor %}
+
+	                                    {% endfor %}
+	                                    {% else %}
+	                                        <p>No activities available.</p>
+	                                    {% endif %}
+	                                </tbody>
+	                            </table>
+	                        </div>
+	                    </div>
+	                </div>
+				</div>
+    </div>
+</div>
+{% endblock content %}
