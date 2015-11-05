@@ -14,7 +14,7 @@ class IndexView(generic.ListView):
 	context_object_name = 'latest_workouts_list'
 
 	def get_queryset(self):
-		return Workout.objects.order_by('-date')[:5]
+		return Workout.objects.filter(owner=self.request.user.id).order_by('-date')[:5]
 
 class WorkoutCreateView(generic.CreateView):
 	model = Workout
@@ -23,7 +23,7 @@ class WorkoutCreateView(generic.CreateView):
 
 	def form_valid(self,form):
 		self.object = form.save(commit=False)
-		self.object.user = self.request.user
+		self.object.owner = self.request.user
 		self.object.date = datetime.date.today()
 		self.object.save()
 		return HttpResponseRedirect(reverse('workouts:workout-detail', args=([self.object.id])))
@@ -49,6 +49,7 @@ class ActivityCreateView(generic.CreateView):
 		if formset.is_valid():
 			self.object = form.save(commit=False)
 			workout = Workout.objects.get(pk=self.kwargs['pk'])
+			self.object.owner = self.request.user
 			self.object.workout = workout
 			self.object.save()
 			formset.instance = self.object

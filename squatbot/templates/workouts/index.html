@@ -12,6 +12,7 @@
                                 <div class="table-full-width">
                                     <table class="table">
                                         <tbody>
+                                            {% if request.user.is_authenticated %}
                                             {% if latest_workouts_list %}
                                                 {% for workout in latest_workouts_list %}
                                                     <tr>
@@ -27,8 +28,10 @@
                                                 </td>
                                             </tr>
                                                        {% endfor %}
+                                            {% endif %}
+
                                             {% else %}
-                                                <p>No workouts are available.</p>
+                                                <td>No workouts are available.</td>
                                             {% endif %}
 
                                             

@@ -5,7 +5,7 @@ from squatbot.users.models import User
 class Workout(models.Model):
 	name = models.CharField(max_length=50)
 	date = models.DateField()
-	user = models.ForeignKey(User)
+	owner = models.ForeignKey(User)
 	created_date = models.DateTimeField(auto_now_add=True)
 	modified_date = models.DateTimeField(auto_now=True)
 
@@ -16,6 +16,7 @@ class Workout(models.Model):
 class Activity(models.Model):
 	name = models.CharField(max_length=50)
 	workout = models.ForeignKey(Workout,related_name='activities')
+	owner = models.ForeignKey(User)
 	created_date = models.DateTimeField(auto_now_add=True)
 	modified_date = models.DateTimeField(auto_now=True)
 
